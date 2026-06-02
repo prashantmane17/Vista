@@ -1,0 +1,20 @@
+{
+  "name": "shopify-theme-vite-build",
+  "version": "1.0.0",
+  "description": "Production-ready build system for Shopify theme using Vite and SCSS",
+  "main": "assets/theme.js",
+  "type": "module",
+  "scripts": {
+    "start": "concurrently \"npm run watch\" \"npm run shopify\"",
+    "watch": "vite build --mode development --watch",
+    "build": "vite build --mode production",
+    "shopify": "shopify theme dev"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
+    "postcss": "^8.4.38",
+    "sass": "^1.77.2",
+    "vite": "^5.2.11"
+  }
+}

@@ -1,0 +1,1 @@
+class e{constructor(){this.initialized=!1}init(){this.initialized||(this.initialized=!0,console.log("Shopify Theme Core Initialized"))}}document.addEventListener("DOMContentLoaded",()=>{new e().init()});

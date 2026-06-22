@@ -1,0 +1,25 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Sizing Utilities (Width & Height)
+// -----------------------------------------------------------------------------
+
+@use 'config' as *;
+@use 'mixins' as *;
+
+// 1. Width Utilities
+// Special width classes: .w-full, .w-auto, .w-fit, .w-screen
+@include generate-utility('w', 'width', $width-special-map);
+
+// Percentage width classes: .w-1/2, .w-1/3, .w-2/3, etc.
+@include generate-utility('w', 'width', $percentage-widths);
+
+// 2. Height Utilities
+// Special height classes: .h-full, .h-auto, .h-fit, .h-screen
+@include generate-utility('h', 'height', $height-special-map);
+
+// 3. Min-Width Utilities
+// Generates: .min-w-0, .min-w-full
+@include generate-utility('min-w', 'min-width', $min-width-map);
+
+// 4. Max-Width Utilities
+// Generates: .max-w-none, .max-w-xs, .max-w-sm, .max-w-md, etc.
+@include generate-utility('max-w', 'max-width', $max-width-map);

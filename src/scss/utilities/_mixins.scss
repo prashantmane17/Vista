@@ -1,0 +1,96 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Mixins & Generation Helpers
+// -----------------------------------------------------------------------------
+
+@use 'sass:map';
+@use 'config' as *;
+
+// Breakpoint Media Query Mixin
+// Uses mobile-first min-width approach matching Tailwind
+@mixin respond-to($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    @media (min-width: map.get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @error "Unknown breakpoint: #{$breakpoint}.";
+  }
+}
+
+// 1. Standard Prefix/Suffix Utility Generator
+// Outputs: .prefix-key { property: value !important; }
+// Outputs responsive variants: .sm:prefix-key { property: value !important; }
+@mixin generate-utility($prefix, $property, $map, $responsive: true) {
+  // Base utility classes
+  @each $key, $value in $map {
+    .#{$prefix}-#{$key} {
+      #{$property}: $value !important;
+    }
+  }
+
+  // Generate responsive variants
+  @if $responsive {
+    @each $bp-name, $bp-val in $breakpoints {
+      @include respond-to($bp-name) {
+        @each $key, $value in $map {
+          .#{$bp-name}\:#{$prefix}-#{$key} {
+            #{$property}: $value !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 2. Simple Utility Generator (class name matches key exactly)
+// Outputs: .key { property: value !important; }
+// Outputs responsive variants: .sm:key { property: value !important; }
+@mixin generate-simple-utility($map, $property, $responsive: true) {
+  // Base utility classes
+  @each $class, $value in $map {
+    .#{$class} {
+      #{$property}: $value !important;
+    }
+  }
+
+  // Generate responsive variants
+  @if $responsive {
+    @each $bp-name, $bp-val in $breakpoints {
+      @include respond-to($bp-name) {
+        @each $class, $value in $map {
+          .#{$bp-name}\:#{$class} {
+            #{$property}: $value !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 3. Multi-Property Spacing Utility Generator
+// Used for margin/padding utilities affecting multiple edges (e.g. mx, py)
+@mixin generate-spacing-utility($prefix, $properties, $map, $responsive: true) {
+  // Base utility classes
+  @each $key, $value in $map {
+    .#{$prefix}-#{$key} {
+      @each $prop in $properties {
+        #{$prop}: $value !important;
+      }
+    }
+  }
+
+  // Generate responsive variants
+  @if $responsive {
+    @each $bp-name, $bp-val in $breakpoints {
+      @include respond-to($bp-name) {
+        @each $key, $value in $map {
+          .#{$bp-name}\:#{$prefix}-#{$key} {
+            @each $prop in $properties {
+              #{$prop}: $value !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

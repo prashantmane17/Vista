@@ -1,0 +1,10 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Z-index Utilities
+// -----------------------------------------------------------------------------
+
+@use 'config' as *;
+@use 'mixins' as *;
+
+// Generates: .z-0, .z-10, .z-20, .z-30, .z-40, .z-50
+// and responsive variants (e.g. .lg:z-50)
+@include generate-utility('z', 'z-index', $z-index-map);

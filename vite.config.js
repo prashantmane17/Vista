@@ -36,7 +36,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           // Entry point for Javascript and SCSS
-          theme: resolve(__dirname, 'src/js/theme.js')
+          base: resolve(__dirname, 'src/js/base.js')
         },
         output: {
           // Keep filenames clean without hash values to match Shopify theme requirements
@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => {
           chunkFileNames: 'chunk-[name].js',
           assetFileNames: (assetInfo) => {
             if (assetInfo.name && assetInfo.name.endsWith('.css')) {
-              return 'theme.css';
+              return 'base.css';
             }
             return '[name].[ext]';
           }

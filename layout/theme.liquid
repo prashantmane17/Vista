@@ -19,12 +19,12 @@
 
     {% # Load and preload the critical CSS %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
 
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
-    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'base.js' | asset_url }}" defer></script>
 
     {{ content_for_header }}
   </head>

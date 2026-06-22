@@ -1,0 +1,21 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Flexbox Utilities
+// -----------------------------------------------------------------------------
+
+@use 'config' as *;
+@use 'mixins' as *;
+
+// Generates direction: .flex-row, .flex-col
+@include generate-simple-utility($flex-direction-map, 'flex-direction');
+
+// Generates wrap: .flex-wrap
+@include generate-simple-utility($flex-wrap-map, 'flex-wrap');
+
+// Generates justify-content: .justify-start, .justify-center, .justify-end, .justify-between, .justify-around
+@include generate-simple-utility($justify-content-map, 'justify-content');
+
+// Generates align-items: .items-start, .items-center, .items-end
+@include generate-simple-utility($align-items-map, 'align-items');
+
+// Generates align-self: .self-start, .self-center, .self-end
+@include generate-simple-utility($align-self-map, 'align-self');

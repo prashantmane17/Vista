@@ -2,7 +2,7 @@
   "name": "vista",
   "version": "1.0.0",
   "description": "Production-ready build system for Shopify theme using Vite and SCSS",
-  "main": "assets/theme.js",
+  "main": "assets/base.js",
   "type": "module",
   "scripts": {
     "start": "concurrently \"npm run watch\" \"npm run shopify\"",

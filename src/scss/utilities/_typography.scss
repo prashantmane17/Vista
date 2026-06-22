@@ -1,0 +1,26 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Typography Utilities
+// -----------------------------------------------------------------------------
+
+@use 'config' as *;
+@use 'mixins' as *;
+
+// 1. Text Alignment
+// Generates: .text-left, .text-center, .text-right
+@include generate-simple-utility($text-align-map, 'text-align');
+
+// 2. Text Transformation
+// Generates: .text-uppercase, .text-lowercase, .text-capitalize
+@include generate-simple-utility($text-transform-map, 'text-transform');
+
+// 3. Font Weights
+// Generates: .font-light, .font-normal, .font-medium, .font-semibold, .font-bold
+@include generate-utility('font', 'font-weight', $font-weight-map);
+
+// 4. Font Sizes
+// Generates: .text-xs, .text-sm, .text-base, .text-lg, .text-xl, .text-2xl, etc.
+@include generate-utility('text', 'font-size', $font-size-map);
+
+// 5. Line Heights
+// Generates: .leading-none, .leading-tight, .leading-snug, .leading-normal, etc.
+@include generate-utility('leading', 'line-height', $line-height-map);

@@ -1,0 +1,11 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Display Utilities
+// -----------------------------------------------------------------------------
+
+@use 'config' as *;
+@use 'mixins' as *;
+
+// Generates:
+// .block, .inline, .inline-block, .flex, .inline-flex, .grid, .hidden
+// along with responsive variants (e.g. .sm:block, .md:hidden)
+@include generate-simple-utility($display-map, 'display');

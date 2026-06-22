@@ -1,0 +1,10 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Overflow Utilities
+// -----------------------------------------------------------------------------
+
+@use 'config' as *;
+@use 'mixins' as *;
+
+// Generates: .overflow-hidden, .overflow-auto, .overflow-scroll
+// and responsive variants (e.g. .md:overflow-auto)
+@include generate-simple-utility($overflow-map, 'overflow');

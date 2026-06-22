@@ -1,0 +1,40 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Border Radius Utilities
+// -----------------------------------------------------------------------------
+
+@use 'config' as *;
+@use 'mixins' as *;
+
+// Generates:
+// .rounded-none, .rounded-sm, .rounded, .rounded-md, .rounded-lg, .rounded-xl, .rounded-full
+// and responsive variants (e.g. .sm:rounded, .md:rounded-lg)
+
+// 1. Base classes
+@each $key, $value in $border-radius-map {
+  @if $key == 'default' {
+    .rounded {
+      border-radius: $value !important;
+    }
+  } @else {
+    .rounded-#{$key} {
+      border-radius: $value !important;
+    }
+  }
+}
+
+// 2. Responsive variants
+@each $bp-name, $bp-val in $breakpoints {
+  @include respond-to($bp-name) {
+    @each $key, $value in $border-radius-map {
+      @if $key == 'default' {
+        .#{$bp-name}\:rounded {
+          border-radius: $value !important;
+        }
+      } @else {
+        .#{$bp-name}\:rounded-#{$key} {
+          border-radius: $value !important;
+        }
+      }
+    }
+  }
+}

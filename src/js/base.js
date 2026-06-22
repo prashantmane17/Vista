@@ -1,5 +1,5 @@
 // Import styling entry point so Vite compiles and bundles the SCSS/CSS
-import '../scss/theme.scss';
+import '../scss/base.scss';
 
 // Import ES Modules
 import { CoreBase } from './core/base';

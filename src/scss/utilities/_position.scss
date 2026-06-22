@@ -1,0 +1,21 @@
+// -----------------------------------------------------------------------------
+// Scalable Utility System - Position & Offset Utilities
+// -----------------------------------------------------------------------------
+
+@use 'sass:map';
+@use 'config' as *;
+@use 'mixins' as *;
+
+// 1. Position Types
+// Generates: .relative, .absolute, .fixed, .sticky
+@include generate-simple-utility($position-map, 'position');
+
+// 2. Offsets (Top, Right, Bottom, Left)
+// Combine spacing scale with auto offset
+$offset-map: map.merge($spacing-map, ('auto': auto));
+
+// Generates: .top-0, .top-4, .top-auto, etc.
+@include generate-utility('top', 'top', $offset-map);
+@include generate-utility('bottom', 'bottom', $offset-map);
+@include generate-utility('left', 'left', $offset-map);
+@include generate-utility('right', 'right', $offset-map);

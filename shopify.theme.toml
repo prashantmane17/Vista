@@ -1,0 +1,22 @@
+# Shopify CLI Theme Configuration
+# Reference: https://shopify.dev/docs/storefronts/themes/tools/cli/environments
+
+[environments.default]
+# The Shopify store to connect to (can be store prefix or full myshopify.com URL).
+store = "vista-dev-5gjmsvmp"
+
+# The local port to serve the theme preview from.
+port = 9090
+
+# The remote theme ID or name to target. If commented out, Shopify CLI 
+# will create a temporary local development theme.
+# theme = ""
+
+# Password generated from the Theme Access app or an Admin API token.
+# password = ""
+
+# The password for storefronts with password protection.
+# store-password = ""
+
+# Set to true if you want to allow development on a live theme.
+# allow-live = false

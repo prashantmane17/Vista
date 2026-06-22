@@ -48,7 +48,10 @@
     "page_width": "Page width",
     "show_payment_icons": "Show payment icons",
     "text_style": "Text style",
-    "text": "Text"
+    "text": "Text",
+    "logo": "Logo image",
+    "logo_width": "Logo width",
+    "header_layout": "Header layout"
   },
   "options": {
     "alignment": {
@@ -73,5 +76,12 @@
       "subtitle": "Subtitle",
       "normal": "Normal text"
     },
+    "header_layout": {
+      "logo_center_menu_left": "Logo center, menu left",
+      "logo_left_menu_center": "Logo left, menu center",
+      "logo_center_menu_bottom": "Logo center, menu bottom",
+      "logo_left_menu_left": "Logo left, menu left",
+      "drawer": "Drawer"
+    }
   }
 }

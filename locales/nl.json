@@ -1,0 +1,56 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "Pagina niet gevonden.",
+    "back_to_shopping": "Terug naar winkelen"
+  },
+  "blog": {
+    "article_comments": "Reacties",
+    "article_metadata_html": "{{ date }} door {{ author }}",
+    "comment_form_body": "Reactie",
+    "comment_form_email": "E-mail",
+    "comment_form_name": "Naam",
+    "comment_form_submit": "Plaatsen",
+    "comment_form_title": "Een reactie toevoegen"
+  },
+  "cart": {
+    "checkout": "Afrekenen",
+    "title": "Winkelwagen",
+    "update": "Bijwerken",
+    "remove": "Verwijderen"
+  },
+  "customers": {
+    "login": {
+      "email": "E-mail",
+      "password": "Wachtwoord",
+      "submit": "Inloggen",
+      "title": "Inloggen"
+    }
+  },
+  "collections": {
+    "title": "Collecties"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Toevoegen aan Apple Wallet",
+    "card": "Cadeaubon",
+    "expired": "Deze cadeaubon is verlopen",
+    "expires_on": "Verloopt op {{ expires_on }}",
+    "use_at_checkout": "Gebruik deze cadeaubon bij het afrekenen"
+  },
+  "password": {
+    "title": "Deze winkel is privé",
+    "password": "Wachtwoord",
+    "enter": "Invoeren"
+  },
+  "search": {
+    "title": "Zoeken",
+    "placeholder": "Zoeken naar artikelen, pagina's of producten",
+    "submit": "Zoeken",
+    "no_results_html": "Geen resultaten gevonden voor {{ terms }}",
+    "results_for_html": "{{ count }} resultaten gevonden voor {{ terms }}"
+  },
+  "header": {
+    "open_menu": "Menu openen",
+    "close_menu": "Menu sluiten"
+  }
+}

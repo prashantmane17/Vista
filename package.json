@@ -1,5 +1,5 @@
 {
-  "name": "shopify-theme-vite-build",
+  "name": "vista",
   "version": "1.0.0",
   "description": "Production-ready build system for Shopify theme using Vite and SCSS",
   "main": "assets/theme.js",

@@ -1,0 +1,204 @@
+{% comment %}
+  Main Product section with OS 2.0 blocks and a reusable variant picker.
+{% endcomment %}
+
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'ProductForm-' | append: section.id
+%}
+
+<section class="main-product flex flex-col md:flex-row max-w-7xl mx-auto px-16 py-32 md:px-24 md:py-48" data-section-id="{{ section.id }}">
+  <div class="main-product__media grid w-full md:w-1/2">
+    {% for media in product.media %}
+      {% if media.media_type == 'image' %}
+        {% render 'image', class: 'main-product__image block w-full h-auto', image: media.preview_image %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="main-product__content block w-full md:w-1/2">
+    {% form 'product', product, id: product_form_id, class: 'main-product__form grid' %}
+      <input
+        type="hidden"
+        name="id"
+        value="{{ current_variant.id }}"
+        data-product-variant-id
+      >
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'title' %}
+            <h1 class="main-product__title m-0 text-3xl leading-tight" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+
+          {% when 'price' %}
+            <div class="main-product__price text-lg font-semibold" data-product-price {{ block.shopify_attributes }}>
+              {{ current_variant.price | money }}
+            </div>
+
+          {% when 'description' %}
+            {% if product.description != blank %}
+              <div class="main-product__description rte" {{ block.shopify_attributes }}>
+                {{ product.description }}
+              </div>
+            {% endif %}
+
+          {% when 'variant_picker' %}
+            {% render 'product-variant-picker',
+              product: product,
+              block: block
+            %}
+
+          {% when 'quantity_selector' %}
+            <div class="main-product__quantity grid" {{ block.shopify_attributes }}>
+              <label for="Quantity-{{ section.id }}">Quantity</label>
+              <input
+                class="main-product__quantity-input"
+                id="Quantity-{{ section.id }}"
+                type="number"
+                name="quantity"
+                min="1"
+                value="1"
+              >
+            </div>
+
+          {% when 'buy_buttons' %}
+            <div class="main-product__buttons" {{ block.shopify_attributes }}>
+              <button
+                type="submit"
+                name="add"
+                class="main-product__submit w-full"
+                data-product-submit
+                data-add-text="Add to cart"
+                {% unless current_variant.available %}
+                  disabled
+                {% endunless %}
+              >
+                {% if current_variant.available %}
+                  Add to cart
+                {% else %}
+                  Sold out
+                {% endif %}
+              </button>
+              {{ form | payment_button }}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    {% endform %}
+  </div>
+</section>
+
+{{ 'product-variant-picker.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-variant-picker.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Title",
+      "limit": 1
+    },
+    {
+      "type": "price",
+      "name": "Price",
+      "limit": 1
+    },
+    {
+      "type": "description",
+      "name": "Description",
+      "limit": 1
+    },
+    {
+      "type": "variant_picker",
+      "name": "Variant Picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "select",
+          "id": "picker_type",
+          "label": "Picker Type",
+          "options": [
+            {
+              "value": "dropdown",
+              "label": "Dropdown"
+            },
+            {
+              "value": "pill",
+              "label": "Pill Buttons"
+            }
+          ],
+          "default": "pill"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_swatches",
+          "label": "Enable Swatches",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "swatch_source",
+          "label": "Swatch Source",
+          "options": [
+            {
+              "value": "variant_image",
+              "label": "Variant Image"
+            },
+            {
+              "value": "color_value",
+              "label": "Color Value"
+            }
+          ],
+          "default": "color_value"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_unavailable",
+          "label": "Hide unavailable variants",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "quantity_selector",
+      "name": "Quantity selector",
+      "limit": 1
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Buy buttons",
+      "limit": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main product",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "price"
+        },
+        {
+          "type": "variant_picker"
+        },
+        {
+          "type": "quantity_selector"
+        },
+        {
+          "type": "buy_buttons"
+        },
+        {
+          "type": "description"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

@@ -1,0 +1,153 @@
+{% doc %}
+  Renders a product variant picker for the main product form.
+
+  @param {product} product - The product to render options for
+  @param {block} block - The variant picker block
+
+  @example
+  {% render 'product-variant-picker', product: product, block: block %}
+{% enddoc %}
+
+{% liquid
+  assign picker_type = block.settings.picker_type | default: 'pill'
+  assign enable_swatches = block.settings.enable_swatches
+  assign swatch_source = block.settings.swatch_source | default: 'color_value'
+  assign hide_unavailable = block.settings.hide_unavailable
+  assign picker_id = block.id | default: product.id
+%}
+
+<product-variant-picker
+  class="product-variant-picker grid"
+  data-product-url="{{ product.url }}"
+  data-hide-unavailable="{{ hide_unavailable }}"
+  {{ block.shopify_attributes }}
+>
+  {% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+      {% liquid
+        assign option_name = option.name | downcase
+        assign option_position = option.position | minus: 1
+        assign is_color_option = false
+
+        if option_name contains 'color'
+          assign is_color_option = true
+        elsif option_name contains 'colour'
+          assign is_color_option = true
+        elsif option_name contains 'couleur'
+          assign is_color_option = true
+        elsif option_name contains 'farbe'
+          assign is_color_option = true
+        endif
+
+        assign render_swatches = false
+        if enable_swatches and is_color_option
+          assign render_swatches = true
+        endif
+      %}
+
+      <fieldset class="variant-picker__group grid m-0 p-0" data-option-index="{{ option_position }}">
+        <legend class="variant-picker__legend m-0 p-0 font-semibold">{{ option.name }}</legend>
+
+        {% if render_swatches %}
+          <div class="variant-picker__swatches flex flex-wrap">
+            {% for value in option.values %}
+              {% liquid
+                assign input_id = picker_id | append: '-' | append: option.position | append: '-' | append: forloop.index
+                assign swatch_image = blank
+
+                if swatch_source == 'variant_image'
+                  for variant in product.variants
+                    if variant.options[option_position] == value and variant.featured_image
+                      assign swatch_image = variant.featured_image
+                      break
+                    endif
+                  endfor
+                endif
+              %}
+
+              <div class="variant-picker__item variant-picker__item--swatch inline-flex" data-variant-choice>
+                <input
+                  class="variant-picker__input absolute"
+                  type="radio"
+                  id="{{ input_id }}"
+                  name="option-{{ picker_id }}-{{ option.position }}"
+                  value="{{ value | escape }}"
+                  data-option-index="{{ option_position }}"
+                  data-option-value="{{ value | escape }}"
+                  {% if option.selected_value == value %}
+                    checked
+                  {% endif %}
+                >
+                <label class="variant-swatch relative inline-flex items-center justify-center rounded-full" for="{{ input_id }}" title="{{ value | escape }}">
+                  {% if swatch_image != blank %}
+                    <span
+                      class="variant-swatch__color variant-swatch__color--image rounded-full"
+                      style="background-image: url({{ swatch_image | image_url: width: 96 }});"
+                    ></span>
+                  {% else %}
+                    <span
+                      class="variant-swatch__color rounded-full"
+                      style="--swatch-color: {{ value | escape }};"
+                    ></span>
+                  {% endif %}
+                  <span class="variant-swatch__label absolute">{{ value }}</span>
+                  <span class="visually-hidden" data-state-text></span>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        {% elsif picker_type == 'dropdown' %}
+          <label class="visually-hidden" for="Option-{{ picker_id }}-{{ option.position }}">
+            {{ option.name }}
+          </label>
+          <select
+            class="variant-picker__select w-full"
+            id="Option-{{ picker_id }}-{{ option.position }}"
+            data-option-index="{{ option_position }}"
+            aria-label="{{ option.name | escape }}"
+          >
+            {% for value in option.values %}
+              <option
+                value="{{ value | escape }}"
+                data-option-value="{{ value | escape }}"
+                {% if option.selected_value == value %}
+                  selected
+                {% endif %}
+              >
+                {{ value }}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <div class="variant-picker__pills flex flex-wrap">
+            {% for value in option.values %}
+              {% assign input_id = picker_id | append: '-' | append: option.position | append: '-' | append: forloop.index %}
+              <div class="variant-picker__item variant-picker__item--pill inline-flex" data-variant-choice>
+                <input
+                  class="variant-picker__input absolute"
+                  type="radio"
+                  id="{{ input_id }}"
+                  name="option-{{ picker_id }}-{{ option.position }}"
+                  value="{{ value | escape }}"
+                  data-option-index="{{ option_position }}"
+                  data-option-value="{{ value | escape }}"
+                  {% if option.selected_value == value %}
+                    checked
+                  {% endif %}
+                >
+                <label class="variant-pill relative inline-flex items-center justify-center" for="{{ input_id }}">
+                  <span>{{ value }}</span>
+                  <span class="visually-hidden" data-state-text></span>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </fieldset>
+    {% endfor %}
+  {% endunless %}
+
+  <script type="application/json" data-variant-json>
+    {{ product.variants | json }}
+  </script>
+</product-variant-picker>

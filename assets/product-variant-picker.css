@@ -1,0 +1,159 @@
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.main-product {
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .main-product {
+    gap: 48px;
+  }
+}
+
+.main-product__media,
+.main-product__form,
+.main-product__quantity,
+.product-variant-picker,
+.variant-picker__group {
+  gap: 16px;
+}
+
+.variant-picker__group {
+  border: 0;
+}
+
+.main-product__quantity-input {
+  width: 96px;
+  min-height: 44px;
+  padding: 8px 12px;
+}
+
+.main-product__submit {
+  min-height: 48px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  cursor: pointer;
+}
+
+.main-product__submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.variant-picker__pills,
+.variant-picker__swatches {
+  gap: 10px;
+}
+
+.variant-picker__input {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.variant-pill,
+.variant-swatch {
+  min-height: 44px;
+  border: 1px solid #c9c9c9;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.variant-pill {
+  min-width: 48px;
+  padding: 10px 16px;
+}
+
+.variant-swatch {
+  width: 44px;
+  height: 44px;
+}
+
+.variant-swatch__color {
+  width: 30px;
+  height: 30px;
+  background: var(--swatch-color, transparent);
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.variant-swatch__label {
+  inset-block-start: calc(100% + 6px);
+  inset-inline-start: 50%;
+  z-index: 2;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: #111;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.variant-swatch:hover .variant-swatch__label,
+.variant-swatch:focus-within .variant-swatch__label {
+  opacity: 1;
+}
+
+.variant-picker__input:checked + .variant-pill,
+.variant-picker__input:checked + .variant-swatch {
+  border-color: #111;
+  box-shadow: 0 0 0 1px #111;
+}
+
+.variant-picker__input:focus-visible + .variant-pill,
+.variant-picker__input:focus-visible + .variant-swatch {
+  outline: 2px solid #334fb4;
+  outline-offset: 3px;
+}
+
+.variant-picker__input:disabled + .variant-pill,
+.variant-picker__input:disabled + .variant-swatch,
+.variant-pill.is-sold-out,
+.variant-swatch.is-sold-out,
+.variant-pill.is-unavailable,
+.variant-swatch.is-unavailable {
+  opacity: 0.45;
+}
+
+.variant-pill.is-sold-out::after,
+.variant-swatch.is-sold-out::after,
+.variant-pill.is-unavailable::after,
+.variant-swatch.is-unavailable::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 8px;
+  inset-inline-end: 8px;
+  inset-block-start: 50%;
+  border-top: 1px solid currentColor;
+  transform: rotate(-18deg);
+}
+
+.variant-picker__select {
+  min-height: 44px;
+  padding: 10px 36px 10px 12px;
+  border: 1px solid #c9c9c9;
+  background: #fff;
+  color: #111;
+}
+
+.variant-picker__select:focus-visible {
+  outline: 2px solid #334fb4;
+  outline-offset: 2px;
+}

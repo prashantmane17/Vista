@@ -6,7 +6,7 @@
 @use 'mixins' as *;
 
 // 1. Text Alignment
-// Generates: .text-left, .text-center, .text-right
+// Generates: .text-start, .text-center, .text-end
 @include generate-simple-utility($text-align-map, 'text-align');
 
 // 2. Text Transformation

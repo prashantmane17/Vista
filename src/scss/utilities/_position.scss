@@ -17,5 +17,5 @@ $offset-map: map.merge($spacing-map, ('auto': auto));
 // Generates: .top-0, .top-4, .top-auto, etc.
 @include generate-utility('top', 'top', $offset-map);
 @include generate-utility('bottom', 'bottom', $offset-map);
-@include generate-utility('left', 'left', $offset-map);
-@include generate-utility('right', 'right', $offset-map);
+@include generate-utility('start', 'inset-inline-start', $offset-map);
+@include generate-utility('end', 'inset-inline-end', $offset-map);

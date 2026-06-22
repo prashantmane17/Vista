@@ -6,21 +6,21 @@
 @use 'mixins' as *;
 
 // 1. Margin Utilities
-// Generates: .m-*, .mx-*, .my-*, .mt-*, .mr-*, .mb-*, .ml-*
+// Generates: .m-*, .mx-*, .my-*, .mt-*, .me-*, .mb-*, .ms-*
 @include generate-utility('m', 'margin', $spacing-map);
-@include generate-spacing-utility('mx', ('margin-left', 'margin-right'), $spacing-map);
+@include generate-spacing-utility('mx', ('margin-inline-start', 'margin-inline-end'), $spacing-map);
 @include generate-spacing-utility('my', ('margin-top', 'margin-bottom'), $spacing-map);
 @include generate-utility('mt', 'margin-top', $spacing-map);
-@include generate-utility('mr', 'margin-right', $spacing-map);
+@include generate-utility('me', 'margin-inline-end', $spacing-map);
 @include generate-utility('mb', 'margin-bottom', $spacing-map);
-@include generate-utility('ml', 'margin-left', $spacing-map);
+@include generate-utility('ms', 'margin-inline-start', $spacing-map);
 
 // 2. Padding Utilities
-// Generates: .p-*, .px-*, .py-*, .pt-*, .pr-*, .pb-*, .pl-*
+// Generates: .p-*, .px-*, .py-*, .pt-*, .pe-*, .pb-*, .ps-*
 @include generate-utility('p', 'padding', $spacing-map);
-@include generate-spacing-utility('px', ('padding-left', 'padding-right'), $spacing-map);
+@include generate-spacing-utility('px', ('padding-inline-start', 'padding-inline-end'), $spacing-map);
 @include generate-spacing-utility('py', ('padding-top', 'padding-bottom'), $spacing-map);
 @include generate-utility('pt', 'padding-top', $spacing-map);
-@include generate-utility('pr', 'padding-right', $spacing-map);
+@include generate-utility('pe', 'padding-inline-end', $spacing-map);
 @include generate-utility('pb', 'padding-bottom', $spacing-map);
-@include generate-utility('pl', 'padding-left', $spacing-map);
+@include generate-utility('ps', 'padding-inline-start', $spacing-map);

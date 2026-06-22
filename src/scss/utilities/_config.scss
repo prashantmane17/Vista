@@ -144,9 +144,9 @@ $max-width-map: (
 
 // 6. Typography Maps
 $text-align-map: (
-  'text-left': left,
+  'text-start': start,
   'text-center': center,
-  'text-right': right
+  'text-end': end
 ) !default;
 
 $text-transform-map: (

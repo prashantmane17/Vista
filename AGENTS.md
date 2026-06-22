@@ -1485,3 +1485,11 @@ Schema locale files, saved with a .schema.json extension, store translation stri
 {% endschema %}
 ```
 
+## Agent Rules Directory
+
+Before making any modifications, refactoring, or creating code, please refer to and strictly follow our modular rule configurations:
+- [Utility Class Usage Rules](file:///Users/ascend-macbookair/Documents/Dev/test/vista/.agent/utilities.md)
+- [RTL (Right-to-Left) Support Rules](file:///Users/ascend-macbookair/Documents/Dev/test/vista/.agent/rtl.md)
+
+
+

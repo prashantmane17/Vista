@@ -36,7 +36,8 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           // Entry point for Javascript and SCSS
-          base: resolve(__dirname, 'src/js/base.js')
+          base: resolve(__dirname, 'src/js/base.js'),
+          swiper: resolve(__dirname, 'src/js/general/swiper.js')
         },
         output: {
           // Keep filenames clean without hash values to match Shopify theme requirements

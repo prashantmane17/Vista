@@ -1,8 +1,13 @@
 // Import styling entry point so Vite compiles and bundles the SCSS/CSS
 import '../scss/base.scss';
 
+import 'swiper/css/bundle';
+import { animate, stagger, spring, inView, scroll } from 'motion';
+
 // Import ES Modules
-import { CoreBase } from './core/base';
+import { CoreBase } from './general/base';
+
+window.Motion = { animate, stagger, spring, inView, scroll };
 
 // Initialize the theme on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
